@@ -1,5 +1,6 @@
 import sys   # sys library provides various functions and variables that are used to manipulate different parts of the Python runtime environment.  
 import logging  # We are importing the logging module to log the error messages. This will help us to keep track of the errors and also to debug the code. We can log the error messages in a file or in the console depending on our requirement. In this project, we will log the error messages in a file. We will create a separate file for logging the error messages and we will use the logging module to log the error messages in that file. We will also use the logging module to log the error messages in the console for debugging purposes.
+from src.logger import logging  # We are importing the logging module from the logger.py file that we have created in the src directory. This will allow us to use the logging module to log the error messages in our project. We will use the logging module to log the error messages in a file and also in the console for debugging purposes. We will create a separate file for logging the error messages and we will use the logging module to log the error messages in that file. We will also use the logging module to log the error messages in the console for debugging purposes.    
 
 
 def error_message_detail(error, error_detail:sys):
@@ -18,12 +19,12 @@ class CustomException(Exception):
         return self.error_message  # The __str__ method is a special method in Python that is called when we try to convert an object to a string. In this case, we are overriding the __str__ method to return the detailed error message when we print the CustomException object.
     
 
-# # Initial test
-# if __name__ == "__main__":
+# Initial test
+if __name__ == "__main__":
 
-#     try:
-#         a = 1 / 0  # This will raise a ZeroDivisionError because we cannot divide a number by zero.
-#     except Exception as e:
-#         logging.info("An error occurred.")  # We are logging an info message to indicate that an error has occurred. This is just a test to check if the logging is working properly. We can remove this line later when we start using the logging in our project.
-#         raise CustomException(e, sys)  # We are raising a CustomException with the original exception and the sys module as arguments. This will allow us to get the detailed error message when the exception is raised.
+    try:
+        a = 1 / 0  # This will raise a ZeroDivisionError because we cannot divide a number by zero.
+    except Exception as e:
+        logging.info("An error occurred.")  # We are logging an info message to indicate that an error has occurred. This is just a test to check if the logging is working properly. We can remove this line later when we start using the logging in our project.
+        raise CustomException(e, sys)  # We are raising a CustomException with the original exception and the sys module as arguments. This will allow us to get the detailed error message when the exception is raised.
     
