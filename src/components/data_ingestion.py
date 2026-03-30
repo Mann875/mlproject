@@ -6,6 +6,9 @@ import pandas as pd # Because we are going to work with dataframes
 from sklearn.model_selection import train_test_split # for splitting the data into train and test sets
 from dataclasses import dataclass # for creating class variables
 
+from src.components.data_transformation import DataTransformation, DataTransformationConfig # importing the data transformation config class, because we need to use the preprocessor object file path from the data transformation config class to save the preprocessor object in the same path as we are saving the transformed data, so that we can easily load the preprocessor object and the transformed data in the later stages of the pipeline.  
+
+
 @dataclass   # Decorator to automatically generate special methods like __init__() and __repr__() for the class
 class DataIngestionConfig:
     train_data_path: str = os.path.join('artifacts', 'train.csv') # path to save the train data
@@ -51,6 +54,10 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion() # creating an instance of the DataIngestion class
-    obj.initiate_data_ingestion() # calling the initiate_data_ingestion method to start the data ingestion process  
+    train_data, test_data = obj.initiate_data_ingestion() # calling the initiate_data_ingestion method to start the data ingestion process  
+    data_transformation = DataTransformation() # creating an instance of the DataTransformation class
+    data_transformation.initiate_data_transformation(train_data, test_data) 
+    # calling the initiate_data_transformation method to start the data transformation process, and passing the paths of the train and test data as arguments to the method, so that it can read the train and test data from the specified paths and perform the data transformation steps on them.
+    
 
 # So the data ingestion step will be executed when we run this script, and artifact folder will be created after this step
