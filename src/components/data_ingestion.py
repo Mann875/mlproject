@@ -8,9 +8,9 @@ from dataclasses import dataclass # for creating class variables
 
 @dataclass   # Decorator to automatically generate special methods like __init__() and __repr__() for the class
 class DataIngestionConfig:
-    train_data_path: str = os.path.join('artifact', 'train.csv') # path to save the train data
-    test_data_path: str = os.path.join('artifact', 'test.csv') # path to save the test data
-    raw_data_path: str = os.path.join('artifact', 'raw.csv') # path to save the raw data
+    train_data_path: str = os.path.join('artifacts', 'train.csv') # path to save the train data
+    test_data_path: str = os.path.join('artifacts', 'test.csv') # path to save the test data
+    raw_data_path: str = os.path.join('artifacts', 'data.csv') # path to save the raw data
 
 # So this are the inputs given to the data ingestion component, so that it knows where to save the train, test and raw data.
 
