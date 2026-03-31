@@ -4,7 +4,7 @@ import sys
 
 import numpy as np
 import pandas as pd
-
+from sklearn.metrics import r2_score
 from src.exception import CustomException 
 
 def save_object(file_path, obj):
@@ -16,3 +16,21 @@ def save_object(file_path, obj):
     except Exception as e:
         raise CustomException(e, sys) # raising a custom exception if any error occurs during the saving of the object, and passing the error message and the system information to the custom exception class.
 
+def evaluate_model(X_train, y_train, X_test, y_test, models):
+    try:
+        model_report = {} # initializing an empty dictionary to store the model report, which will contain the model name and the corresponding r2 score.
+        for i in range(len(models)):
+            model = list(models.values())[i] # getting the model from the models dictionary using the index, and storing it in the model variable.
+            model.fit(X_train, y_train) # fitting the model on the training data, so that we can make predictions on the test data.
+           
+            y_train_pred = model.predict(X_train) # making predictions on the training data using the fitted model, and storing the predicted values in the y_train_pred variable.
+            train_model_score = r2_score(y_train, y_train_pred) # calculating the r2 score for the training data by comparing the actual values (y_train) with the predicted values (y_train_pred), and storing it in the train_model_score variable.
+        
+            y_test_pred = model.predict(X_test) # making predictions on the test data using the fitted model, and storing the predicted values in the y_test_pred variable.
+            test_model_score = r2_score(y_test, y_test_pred) # calculating the r2 score for the test data by comparing the actual values (y_test) with the predicted values (y_test_pred), and storing it in the test_model_score variable.
+            
+            model_report[list(models.keys())[i]] = test_model_score # adding the model name and its corresponding r2 score to the model_report dictionary, where the key is the model name and the value is the r2 score.
+        return model_report # returning the model_report dictionary, which contains all the models and their corresponding r2 scores.
+    except Exception as e:
+        raise CustomException(e, sys) # raising a custom exception if any error occurs during the evaluation of the models, and passing the error message and the system information to the custom exception class. 
+    

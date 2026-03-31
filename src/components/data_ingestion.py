@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split # for splitting the data in
 from dataclasses import dataclass # for creating class variables
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig # importing the data transformation config class, because we need to use the preprocessor object file path from the data transformation config class to save the preprocessor object in the same path as we are saving the transformed data, so that we can easily load the preprocessor object and the transformed data in the later stages of the pipeline.  
+from src.components.model_trainer import ModelTrainer, ModelTrainerConfig # importing the model trainer config class, because we need to use the trained model file path from the model trainer config class to save the trained model in the same path as we are saving the transformed data, so that we can easily load the trained model and the transformed data in the later stages of the pipeline.   
 
 
 @dataclass   # Decorator to automatically generate special methods like __init__() and __repr__() for the class
@@ -56,8 +57,11 @@ if __name__ == "__main__":
     obj = DataIngestion() # creating an instance of the DataIngestion class
     train_data, test_data = obj.initiate_data_ingestion() # calling the initiate_data_ingestion method to start the data ingestion process  
     data_transformation = DataTransformation() # creating an instance of the DataTransformation class
-    data_transformation.initiate_data_transformation(train_data, test_data) 
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data) 
     # calling the initiate_data_transformation method to start the data transformation process, and passing the paths of the train and test data as arguments to the method, so that it can read the train and test data from the specified paths and perform the data transformation steps on them.
-    
+    # Assigning the transformed data to the train_arr and test_arr variables, which will be used as input for the model training process.   
+    ModelTrainer = ModelTrainer() # creating an instance of the ModelTrainer class
+    print(ModelTrainer.initiate_model_trainer(train_arr, test_arr)) # calling the initiate_model_trainer method to start the model training process, and passing the transformed train and test arrays as arguments to the method, so that it can train the models on the transformed data and save the best model to the specified path.  
+
 
 # So the data ingestion step will be executed when we run this script, and artifact folder will be created after this step
