@@ -43,3 +43,10 @@ def evaluate_model(X_train, y_train, X_test, y_test, models, params):
     except Exception as e:
         raise CustomException(e, sys) # raising a custom exception if any error occurs during the evaluation of the models, and passing the error message and the system information to the custom exception class. 
     
+def load_object(file_path):
+    try:
+        with open(file_path, 'rb') as file_obj: # opening the file in read binary mode, so that we can load the object from the file in binary format.
+            return dill.load(file_obj) # loading the object from the file using dill module, which is used for serializing and deserializing Python objects, and returning the loaded object.
+    except Exception as e:
+        raise CustomException(e, sys) # raising a custom exception if any error occurs during the loading of the object, and passing the error message and the system information to the custom exception class.
+    

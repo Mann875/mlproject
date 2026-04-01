@@ -41,7 +41,7 @@ class DataTransformation:
             cat_pipeline = Pipeline(
                 steps=[
                     ('imputer', SimpleImputer(strategy='most_frequent')),
-                    ('one_hot_encoder', OneHotEncoder()),
+                    ('one_hot_encoder', OneHotEncoder(handle_unknown='ignore')), # This will handle the unknown categories in the test data that are not present in the train data, and it will ignore them instead of raising an error.
                     ('scaler', StandardScaler(with_mean=False))
                 ]
             )
