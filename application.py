@@ -38,4 +38,5 @@ def predict_datapoint():
         return render_template('home.html', results=results[0]) # This will render the home.html file and pass the predicted value to the home.html file, so that we can display the predicted value on the web page.   
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True) # This will run the Flask application in debug mode, which will allow us to see the error messages in the console if any error occurs during the execution of the application.      
+    app.run(host="0.0.0.0") # REmove debug=True for production environment. This will run the Flask application, and it will be accessible at http://localhost:5000/ in the web browser.    
+          

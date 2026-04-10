@@ -3,7 +3,7 @@ import pandas as pd # for data manipulation and analysis.
 from src.exception import CustomException # for handling custom exceptions.
 from src.logger import logging # for logging information and errors.
 from src.utils import load_object # for loading the saved model and preprocessor objects.
-
+from src.components.data_transformation import DataTransformation # for performing data transformation on the input data.
 
 class PredictPipeline:
     def __init__(self):
